@@ -334,6 +334,128 @@ function DimensionsSection() {
   );
 }
 
+function CombatStats() {
+  const [hoveredStat, setHoveredStat] = useState<string | null>(null);
+  
+  const stats = [
+    { name: "Strength", level: 85, color: "from-purple-500 to-pink-500", icon: "💪" },
+    { name: "Speed", level: 92, color: "from-blue-500 to-purple-500", icon: "⚡" },
+    { name: "Agility", level: 96, color: "from-pink-500 to-red-500", icon: "🌀" },
+    { name: "Combat IQ", level: 88, color: "from-purple-600 to-blue-500", icon: "🧠" },
+    { name: "Web Mastery", level: 94, color: "from-purple-500 to-pink-600", icon: "🕸️" },
+    { name: "Danger Sense", level: 98, color: "from-red-500 to-pink-500", icon: "⚠️" },
+  ];
+
+  return (
+    <section className="relative py-32 px-6 overflow-hidden">
+      {/* Dark red/purple gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-red-950/10 to-gray-900" />
+      
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-red-400 font-mono text-sm tracking-wider uppercase">// Combat Protocol</span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mt-4">
+            Don't Let the Flowers Fool You
+          </h2>
+          <p className="text-gray-400 text-lg mt-4 max-w-2xl mx-auto">
+            Yeah, I can be peaceful. But when things go sideways? Let's just say I've taken down villains twice my size and lived to drum another day.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Stats bars */}
+          <div className="space-y-6">
+            {stats.map((stat) => (
+              <div
+                key={stat.name}
+                className="group cursor-pointer"
+                onMouseEnter={() => setHoveredStat(stat.name)}
+                onMouseLeave={() => setHoveredStat(null)}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{stat.icon}</span>
+                    <span className="text-white font-bold">{stat.name}</span>
+                  </div>
+                  <span className={`font-mono text-sm transition-colors ${
+                    hoveredStat === stat.name ? 'text-white' : 'text-gray-500'
+                  }`}>
+                    {stat.level}/100
+                  </span>
+                </div>
+                <div className="relative h-3 bg-gray-800 rounded-full overflow-hidden">
+                  <div
+                    className={`absolute inset-y-0 left-0 bg-gradient-to-r ${stat.color} rounded-full transition-all duration-1000 ease-out ${
+                      hoveredStat === stat.name ? 'shadow-lg' : ''
+                    }`}
+                    style={{
+                      width: `${stat.level}%`,
+                      boxShadow: hoveredStat === stat.name ? '0 0 20px rgba(239, 68, 68, 0.5)' : 'none'
+                    }}
+                  />
+                  {hoveredStat === stat.name && (
+                    <div className="absolute inset-0 bg-white/10 animate-pulse rounded-full" />
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Combat info card */}
+          <div className="relative">
+            <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 to-purple-500/20 rounded-3xl blur-xl opacity-50" />
+            <div className="relative bg-gray-900/80 border border-red-500/30 rounded-3xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+                <span className="text-red-400 font-mono text-sm">THREAT ASSESSMENT</span>
+              </div>
+              
+              <div className="space-y-4 text-sm">
+                <div className="flex justify-between items-center py-2 border-b border-gray-800">
+                  <span className="text-gray-400">Combat Style</span>
+                  <span className="text-white font-medium">Acrobatic Striker</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-800">
+                  <span className="text-gray-400">Preferred Range</span>
+                  <span className="text-white font-medium">Close-Mid</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-800">
+                  <span className="text-gray-400">Signature Move</span>
+                  <span className="text-white font-medium">Web Barrage</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-800">
+                  <span className="text-gray-400">Weakness</span>
+                  <span className="text-white font-medium">Sonic Attacks</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b border-gray-800">
+                  <span className="text-gray-400">Kill Count</span>
+                  <span className="text-green-400 font-medium">Zero (Non-lethal)</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span className="text-gray-400">Danger Level</span>
+                  <span className="text-red-400 font-bold">EXTREME</span>
+                </div>
+              </div>
+
+              <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
+                <p className="text-red-300 text-sm italic">
+                  "I don't kill. But I can make sure you won't be getting up anytime soon."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PeacefulMoment() {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
@@ -477,6 +599,7 @@ export default function App() {
       <AboutSection />
       <AbilitiesSection />
       <DimensionsSection />
+      <CombatStats />
       <PeacefulMoment />
       <QuoteSection />
       <ContactSection />
