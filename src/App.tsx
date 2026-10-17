@@ -456,6 +456,123 @@ function CombatStats() {
   );
 }
 
+function FanMailSection() {
+  const [revealed, setRevealed] = useState<number[]>([]);
+
+  const toggleReveal = (index: number) => {
+    setRevealed(prev => prev.includes(index) ? prev.filter(i => i !== index) : [...prev, index]);
+  };
+
+  const messages = [
+    {
+      from: "Miles M. — Earth-1610",
+      message: "Hey Gwen, you're literally the coolest person I know. Also please stop dodging my texts. 😅",
+      gwenReply: "Miles. You text me 47 times a day. I need SPACE. 💀",
+      vibe: "purple"
+    },
+    {
+      from: "Anonymous Fan — Earth-616",
+      message: "Gwen your legs are incredible. The thighs especially. You're—",
+      gwenReply: "Yep. Got that one a lot. Look, I do squats. A LOT of squats. It's called functional fitness. 😒",
+      vibe: "pink"
+    },
+    {
+      from: "Peter B. — Earth-616B",
+      message: "Gwen, I'm eating a donut right now and thinking about how you're probably doing something cool. Also this donut is amazing.",
+      gwenReply: "Peter. Please eat a vegetable. I'm begging you. 🥦",
+      vibe: "blue"
+    },
+    {
+      from: "Hobie — Earth-UK",
+      message: "Gwen, your anti-establishment energy is unmatched. Also, your boots are sick. Where do you get them?",
+      gwenReply: "I literally made them. Across dimensions. They're custom. 🖤",
+      vibe: "purple"
+    },
+    {
+      from: "Spider-Ham (somehow)",
+      message: "OINK OINK! 🐷",
+      gwenReply: "...I don't even know how this got in my inbox. But honestly? Valid.",
+      vibe: "pink"
+    },
+    {
+      from: "Another Anonymous — Earth-???",
+      message: "Gwen Stacy. You're a goddess. The suit. The hair. The DRUMMING. The—",
+      gwenReply: "Okay I'm stopping reading now. 🙃 But also... thanks? Weird but thanks.",
+      vibe: "blue"
+    },
+  ];
+
+  const vibeColors: Record<string, { border: string; bg: string; text: string; replyBg: string }> = {
+    purple: { border: 'border-purple-500/30', bg: 'bg-purple-500/5', text: 'text-purple-400', replyBg: 'bg-purple-500/10' },
+    pink: { border: 'border-pink-500/30', bg: 'bg-pink-500/5', text: 'text-pink-400', replyBg: 'bg-pink-500/10' },
+    blue: { border: 'border-blue-500/30', bg: 'bg-blue-500/5', text: 'text-blue-400', replyBg: 'bg-blue-500/10' },
+  };
+
+  return (
+    <section className="relative py-32 px-6 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-purple-950/10 to-gray-900" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-pink-400 font-mono text-sm tracking-wider uppercase">// Fan Mail</span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mt-4">
+            Things People Actually Say To Me
+          </h2>
+          <p className="text-gray-400 text-lg mt-4 max-w-xl mx-auto">
+            Being a multiverse-famous superhero comes with... certain types of messages. Click to see my responses. 💀
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {messages.map((msg, index) => {
+            const colors = vibeColors[msg.vibe];
+            const isRevealed = revealed.includes(index);
+            return (
+              <div
+                key={index}
+                onClick={() => toggleReveal(index)}
+                className={`group cursor-pointer p-6 rounded-2xl ${colors.bg} border ${colors.border} hover:border-opacity-60 transition-all duration-300 hover:-translate-y-1`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`${colors.text} text-sm font-mono`}>{msg.from}</span>
+                  <span className="text-gray-600 text-xs group-hover:text-gray-400 transition-colors">
+                    {isRevealed ? '👁️' : '🔒'}
+                  </span>
+                </div>
+                <p className="text-white font-medium mb-4 leading-relaxed">"{msg.message}"</p>
+                
+                <div className={`overflow-hidden transition-all duration-500 ${isRevealed ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'}`}>
+                  <div className={`${colors.replyBg} rounded-xl p-4 border ${colors.border}`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-5 h-5 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <span className="text-white text-[10px] font-bold">G</span>
+                      </div>
+                      <span className="text-gray-400 text-xs font-mono">Gwen's Reply:</span>
+                    </div>
+                    <p className="text-gray-300 text-sm italic">"{msg.gwenReply}"</p>
+                  </div>
+                </div>
+
+                {!isRevealed && (
+                  <p className="text-gray-600 text-xs mt-2 group-hover:text-gray-400 transition-colors">
+                    click to see Gwen's reaction...
+                  </p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-gray-500 text-sm italic">
+            * Names have been changed to protect the... honestly I don't know what I'm protecting. My sanity, probably.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function PeacefulMoment() {
   return (
     <section className="relative py-32 px-6 overflow-hidden">
@@ -600,6 +717,7 @@ export default function App() {
       <AbilitiesSection />
       <DimensionsSection />
       <CombatStats />
+      <FanMailSection />
       <PeacefulMoment />
       <QuoteSection />
       <ContactSection />
