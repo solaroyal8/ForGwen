@@ -334,6 +334,62 @@ function DimensionsSection() {
   );
 }
 
+function PeacefulMoment() {
+  return (
+    <section className="relative py-32 px-6 overflow-hidden">
+      {/* Warm gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-amber-950/20 to-gray-900" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center mb-12">
+          <span className="text-amber-400 font-mono text-sm tracking-wider uppercase">// A Quiet Moment</span>
+          <h2 className="text-4xl md:text-5xl font-black text-white mt-4">
+            Where the Web Ends...
+          </h2>
+          <p className="text-gray-400 text-lg mt-4 max-w-xl mx-auto">
+            Even heroes need a place to rest. A field of flowers, a river's song, and someone to share the silence with.
+          </p>
+        </div>
+
+        <div className="relative group">
+          {/* Glow effects behind image */}
+          <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/20 via-purple-500/10 to-pink-500/20 rounded-3xl blur-2xl opacity-50 group-hover:opacity-75 transition-opacity duration-700" />
+          
+          {/* Image container */}
+          <div className="relative rounded-3xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/10">
+            <img
+              src="https://image.qwenlm.ai/generated-images/a6bb0670-49c1-4895-a672-c534240efcd1/_result.png"
+              alt="Two friends sitting together in a sunlit field of wildflowers by a gentle river"
+              className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Overlay gradient at bottom */}
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent" />
+            
+            {/* Caption */}
+            <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+              <p className="text-white/90 text-lg md:text-xl font-medium italic max-w-2xl">
+                "Some days, the best thing you can do is put down the mask, sit in the flowers, and just... be."
+              </p>
+              <p className="text-amber-400/80 text-sm mt-3 font-mono">— a quiet afternoon, somewhere between dimensions</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Decorative flowers */}
+        <div className="flex justify-center gap-3 mt-8 text-2xl opacity-60">
+          <span>🌸</span>
+          <span>🌼</span>
+          <span>💜</span>
+          <span>🌷</span>
+          <span>🌻</span>
+          <span>💛</span>
+          <span>🌸</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function QuoteSection() {
   return (
     <section className="relative py-32 px-6">
@@ -421,6 +477,7 @@ export default function App() {
       <AboutSection />
       <AbilitiesSection />
       <DimensionsSection />
+      <PeacefulMoment />
       <QuoteSection />
       <ContactSection />
       <Footer />
